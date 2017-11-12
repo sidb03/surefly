@@ -1,0 +1,10 @@
+server: https://chat.development.service.toshi.org
+token_ethereum_service_url: https://ethereum.development.service.toshi.org
+token_id_service_url: https://identity.development.service.toshi.org
+token_exchange_service_url: https://exchange.service.toshi.org
+redis:
+  envKey: REDIS_URL
+  timeout: 2000
+storage:
+  envKey: DATABASE_URL
+  sslmode: disable
