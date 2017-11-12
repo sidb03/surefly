@@ -1,0 +1,466 @@
+{
+  "contractName": "surefly",
+  "abi": [],
+  "bytecode": "0x60606040523415600e57600080fd5b603580601b6000396000f3006060604052600080fd00a165627a7a723058200424c84f2e9e542ecd0ca3bdf76b6ddab615b0aedf7b8c024b3ad654e196ee510029",
+  "deployedBytecode": "0x6060604052600080fd00a165627a7a723058200424c84f2e9e542ecd0ca3bdf76b6ddab615b0aedf7b8c024b3ad654e196ee510029",
+  "sourceMap": "26:462:1:-;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "26:462:1:-;;;;;",
+  "source": "pragma solidity ^0.4.17;\n\ncontract surefly{\n    enum policyStatus {OPEN, MISSED, NOTMISSED, FLIGHTCANCELLED, TICKETCANCELLED}\n    struct investor{\n        uint256 id;\n    }\n    struct user{\n        uint256 maxPayout;\n        uint256 minPayout;\n        uint256 poolSize;\n        uint256 initialPremium;\n        uint256 finalPremium;\n        policyStatus status;\n        mapping (uint => uint) investedAmountOf;\n    }\n    mapping (address => uint) idOf;\n    mapping (uint => user) users;\n\n}",
+  "sourcePath": "/Users/siddharthbarpanda/Desktop/surefly/truffle/contracts/surefly.sol",
+  "ast": {
+    "attributes": {
+      "absolutePath": "/Users/siddharthbarpanda/Desktop/surefly/truffle/contracts/surefly.sol",
+      "exportedSymbols": {
+        "surefly": [
+          93
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.4",
+            ".17"
+          ]
+        },
+        "id": 58,
+        "name": "PragmaDirective",
+        "src": "0:24:1"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            93
+          ],
+          "name": "surefly",
+          "scope": 94
+        },
+        "children": [
+          {
+            "attributes": {
+              "canonicalName": "surefly.policyStatus",
+              "name": "policyStatus"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "OPEN"
+                },
+                "id": 59,
+                "name": "EnumValue",
+                "src": "67:4:1"
+              },
+              {
+                "attributes": {
+                  "name": "MISSED"
+                },
+                "id": 60,
+                "name": "EnumValue",
+                "src": "73:6:1"
+              },
+              {
+                "attributes": {
+                  "name": "NOTMISSED"
+                },
+                "id": 61,
+                "name": "EnumValue",
+                "src": "81:9:1"
+              },
+              {
+                "attributes": {
+                  "name": "FLIGHTCANCELLED"
+                },
+                "id": 62,
+                "name": "EnumValue",
+                "src": "92:15:1"
+              },
+              {
+                "attributes": {
+                  "name": "TICKETCANCELLED"
+                },
+                "id": 63,
+                "name": "EnumValue",
+                "src": "109:15:1"
+              }
+            ],
+            "id": 64,
+            "name": "EnumDefinition",
+            "src": "48:77:1"
+          },
+          {
+            "attributes": {
+              "canonicalName": "surefly.investor",
+              "name": "investor",
+              "scope": 93,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "id",
+                  "scope": 67,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 65,
+                    "name": "ElementaryTypeName",
+                    "src": "155:7:1"
+                  }
+                ],
+                "id": 66,
+                "name": "VariableDeclaration",
+                "src": "155:10:1"
+              }
+            ],
+            "id": 67,
+            "name": "StructDefinition",
+            "src": "130:42:1"
+          },
+          {
+            "attributes": {
+              "canonicalName": "surefly.user",
+              "name": "user",
+              "scope": 93,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "maxPayout",
+                  "scope": 84,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 68,
+                    "name": "ElementaryTypeName",
+                    "src": "198:7:1"
+                  }
+                ],
+                "id": 69,
+                "name": "VariableDeclaration",
+                "src": "198:17:1"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "minPayout",
+                  "scope": 84,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 70,
+                    "name": "ElementaryTypeName",
+                    "src": "225:7:1"
+                  }
+                ],
+                "id": 71,
+                "name": "VariableDeclaration",
+                "src": "225:17:1"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "poolSize",
+                  "scope": 84,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 72,
+                    "name": "ElementaryTypeName",
+                    "src": "252:7:1"
+                  }
+                ],
+                "id": 73,
+                "name": "VariableDeclaration",
+                "src": "252:16:1"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "initialPremium",
+                  "scope": 84,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 74,
+                    "name": "ElementaryTypeName",
+                    "src": "278:7:1"
+                  }
+                ],
+                "id": 75,
+                "name": "VariableDeclaration",
+                "src": "278:22:1"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "finalPremium",
+                  "scope": 84,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 76,
+                    "name": "ElementaryTypeName",
+                    "src": "310:7:1"
+                  }
+                ],
+                "id": 77,
+                "name": "VariableDeclaration",
+                "src": "310:20:1"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "status",
+                  "scope": 84,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "enum surefly.policyStatus",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "contractScope": null,
+                      "name": "policyStatus",
+                      "referencedDeclaration": 64,
+                      "type": "enum surefly.policyStatus"
+                    },
+                    "id": 78,
+                    "name": "UserDefinedTypeName",
+                    "src": "340:12:1"
+                  }
+                ],
+                "id": 79,
+                "name": "VariableDeclaration",
+                "src": "340:19:1"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "investedAmountOf",
+                  "scope": 84,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "mapping(uint256 => uint256)",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "type": "mapping(uint256 => uint256)"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 80,
+                        "name": "ElementaryTypeName",
+                        "src": "378:4:1"
+                      },
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 81,
+                        "name": "ElementaryTypeName",
+                        "src": "386:4:1"
+                      }
+                    ],
+                    "id": 82,
+                    "name": "Mapping",
+                    "src": "369:22:1"
+                  }
+                ],
+                "id": 83,
+                "name": "VariableDeclaration",
+                "src": "369:39:1"
+              }
+            ],
+            "id": 84,
+            "name": "StructDefinition",
+            "src": "177:238:1"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "idOf",
+              "scope": 93,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "mapping(address => uint256)",
+              "value": null,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "type": "mapping(address => uint256)"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "address",
+                      "type": "address"
+                    },
+                    "id": 85,
+                    "name": "ElementaryTypeName",
+                    "src": "429:7:1"
+                  },
+                  {
+                    "attributes": {
+                      "name": "uint",
+                      "type": "uint256"
+                    },
+                    "id": 86,
+                    "name": "ElementaryTypeName",
+                    "src": "440:4:1"
+                  }
+                ],
+                "id": 87,
+                "name": "Mapping",
+                "src": "420:25:1"
+              }
+            ],
+            "id": 88,
+            "name": "VariableDeclaration",
+            "src": "420:30:1"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "users",
+              "scope": 93,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "mapping(uint256 => struct surefly.user storage ref)",
+              "value": null,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "type": "mapping(uint256 => struct surefly.user storage ref)"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint",
+                      "type": "uint256"
+                    },
+                    "id": 89,
+                    "name": "ElementaryTypeName",
+                    "src": "465:4:1"
+                  },
+                  {
+                    "attributes": {
+                      "contractScope": null,
+                      "name": "user",
+                      "referencedDeclaration": 84,
+                      "type": "struct surefly.user storage pointer"
+                    },
+                    "id": 90,
+                    "name": "UserDefinedTypeName",
+                    "src": "473:4:1"
+                  }
+                ],
+                "id": 91,
+                "name": "Mapping",
+                "src": "456:22:1"
+              }
+            ],
+            "id": 92,
+            "name": "VariableDeclaration",
+            "src": "456:28:1"
+          }
+        ],
+        "id": 93,
+        "name": "ContractDefinition",
+        "src": "26:462:1"
+      }
+    ],
+    "id": 94,
+    "name": "SourceUnit",
+    "src": "0:488:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "1.0.1",
+  "updatedAt": "2017-11-12T07:05:39.462Z"
+}
