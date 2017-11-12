@@ -24,12 +24,12 @@ contract surefly{
     uint256 public userCount;
     uint256 public investorCount;
     //event() Pool Filled?
-
+    // Probability * 1.1 * 100
 
     // Events?
 
 
-    function surefly() {
+    function surefly() public {
         userCount = 0;
     }
     //External
@@ -39,10 +39,10 @@ contract surefly{
         users[userCount].maxPayout = _maxPayout;
         users[userCount].minPayout = _minPayout;
         users[userCount].poolSize = 0;
-        users[userCount].intialPremium = _initialPremium;
+        users[userCount].initialPremium = _initialPremium;
         users[userCount].finalPremium = _initialPremium;
         users[userCount].prob = _prob;
-        users[userCount].status = OPEN;
+        users[userCount].status = policyStatus.OPEN;
         users[userCount].departed = false;
         users[userCount].boarded = false;
         users[userCount].investorCount = 0;
@@ -52,23 +52,23 @@ contract surefly{
         return true;
     }
     //Internal
-    function isMaxPayoutReached(uint id) internal returns (bool){
-        if(users[id].poolSize == users[idOf[_adr]].maxPayout){
+    function isMaxPayoutReached(uint id) internal returns (bool) {
+        if(users[id].poolSize == users[id].maxPayout){
             return true;
         }
         else 
         return false;
     }
     //Internal
-    function isMinPayoutReached(uint id) internal returns (bool){
-        if(users[id].poolSize >= users[idOf[_adr]].minPayout){
+    function isMinPayoutReached(uint id) internal returns (bool) {
+        if(users[id].poolSize >= users[id].minPayout){
             return true;
         }
         else 
         return false;
     }
     //Internal
-    function hasFlightDeparted(uint id) internal returns (bool){
+    function hasFlightDeparted(uint id) internal returns (bool) {
         if(users[id].departed){
             return true;
         }
@@ -76,7 +76,7 @@ contract surefly{
         return false;
     }
     //Internal
-    function hasUserBoarded(uint id) internal returns (bool){
+    function hasUserBoarded(uint id) internal returns (bool) {
         if(users[id].boarded){
             return true;
         }
@@ -84,15 +84,14 @@ contract surefly{
         return false;
     }
     //External
-    function queryPoolSize(address adr) public returns (uint256) {
+    function queryPoolSize(address adr) public constant returns (uint256) {
         return users[idOf[adr]].poolSize;
     }
     //External
-    function listAllAvailablePolicies() public returns (address[]) { 
-        uint i=0;
-        address[] openUsers;
-        hfor (i=0; i<=userCount; i++){
-            if (users[i].status == OPEN) {
+    function listAllAvailablePolicies() public constant returns (address[]) { 
+        address[] storage openUsers;
+        for (uint i=0; i<=userCount; i++){
+            if (users[i].status == policyStatus.OPEN) {
                openUsers.push(users[i].adr); 
             }
         } 
@@ -100,29 +99,31 @@ contract surefly{
     }
     // TODO: What to return?
     //External
-    function flightDeparted(address adr) returns (bool) {
-        users[id].departed = true;
-        if(userBoarded(id) == false){
-          users[id].status = MISSED;  
+    function flightDeparted(address adr) public returns (bool) {
+        users[idOf[adr]].departed = true;
+        if(userBoarded(adr) == false){
+          users[idOf[adr]].status = policyStatus.MISSED;  
         }
         else
         {
-            users[id].status = NOTMISSED;
+            users[idOf[adr]].status = policyStatus.NOTMISSED;
         }
         payout(idOf[adr]);
     }
     //External
-    function userBoarded(address adr) returns (bool) {
-        users[id].boarded = true;
+    function userBoarded(address adr) public returns (bool) {
+        users[idOf[adr]].boarded = true;
+        return true;
     }
     //External
-    function cancelPolicy(address adr) {
-        users[idOf[adr]].status = TICKETCANCELLED;
+    function cancelPolicy(address adr) public returns (bool){
+        users[idOf[adr]].status = policyStatus.TICKETCANCELLED;
         payout(idOf[adr]);
+        return true;
     }
     //External
-    function cancelFlight(address adr) {
-        users[idOf[adr]].status = CANCELLED;
+    function cancelFlight(address adr) public {
+        users[idOf[adr]].status = policyStatus.CANCELLED;
         payout(idOf[adr]);
     }
     function isMinRaised(uint id) internal returns (bool){
@@ -132,67 +133,72 @@ contract surefly{
         return false;
     }
 
-    function invest(address adr, uint256 amount) {
+    function invest(address adr, uint256 amount) public returns (bool) {
         require(!isMaxPayoutReached(idOf[adr]));
         //require(isMinPayoutReached(idOf[adr]));
-        require(users[idOf[adr]].status == OPEN);
+        require(users[idOf[adr]].status == policyStatus.OPEN);
         require(!hasFlightDeparted(idOf[adr]));
         require(!hasUserBoarded(idOf[adr]));
         users[idOf[adr]].investedAmountOf[msg.sender] = amount;
         users[idOf[adr]].investorAdrOf[investorCount] = msg.sender;
         users[idOf[adr]].investorCount++;
         users[idOf[adr]].poolSize += amount;
+        return true;
     }
     //if missed? if not? ()s
     //Internal
-    function payout(uint id) internal {
+    function payout(uint id) internal returns (bool){
         
-    require(users[id].status!=OPEN);
+    require(users[id].status!= policyStatus.OPEN);
 
-        if(isMinRaised(id){
-            users[id].status = CANCELLED;
+        if(isMinRaised(id)) {
+            users[id].status = policyStatus.CANCELLED;
         }
- --------       users[id].finalPremium = (users[id].prob * users[id].poolSize * 110) / 100;
-       if(users[id].status == MISSED)
+       users[id].finalPremium = (users[id].prob * users[id].poolSize) / 100;
+       uint256 transferEtherAmount;
+       address adr;
+       uint i;
+       if(users[id].status == policyStatus.MISSED)
         {
             transferEther(address(this), users[id].adr, users[id].poolSize);
-            for(int i=0; i<users[id].investorCount ; i++){
-                address adr = users[id].investorAdrOf[i];
-  -------         uint256 transferEtherAmount = users[id].investedAmountOf[adr] - users[id].finalPremium*users[id].investedAmountOf[adr]/users[id].poolSize;
+            for( i=0; i<users[id].investorCount ; i++){
+                 adr = users[id].investorAdrOf[i];
+                 transferEtherAmount = users[id].investedAmountOf[adr] - (((users[id].finalPremium)*(users[id].investedAmountOf[adr]))/users[id].poolSize);
                 transferEther(address(this), adr, transferEtherAmount);
             }
         }
-        if(users[idOf[adr]].status == NOTMISSED)
+        if(users[idOf[adr]].status == policyStatus.NOTMISSED)
         {
             //transferEther(address(this), users[id].adr, users[id].poolSize);
-            for(int i=0; i<users[id].investorCount ; i++){
-                address adr = users[id].investorAdrOf[i];
- ------               uint256 transferEtherAmount = users[id].investedAmountOf[adr] + users[id].finalPremium*users[id].investedAmountOf[adr]/users[id].poolSize;
+            for(i=0; i<users[id].investorCount ; i++){
+                 adr = users[id].investorAdrOf[i];
+               transferEtherAmount = users[id].investedAmountOf[adr] + (((users[id].finalPremium)*(users[id].investedAmountOf[adr]))/users[id].poolSize);
                 transferEther(address(this), adr, transferEtherAmount);
             }
         }
 
-        if(users[idOf[adr]].status == CANCELLED)
+        if(users[idOf[adr]].status == policyStatus.CANCELLED)
         {
             transferEther(address(this), users[id].adr, users[id].initialPremium);
-            for(int i=0; i<users[id].investorCount ; i++){
-                address adr = users[id].investorAdrOf[i];
-                uint256 transferEtherAmount = users[id].investedAmountOf[adr];
+            for( i=0; i<users[id].investorCount ; i++){
+                 adr = users[id].investorAdrOf[i];
+                transferEtherAmount = users[id].investedAmountOf[adr];
                 transferEther(address(this), adr, transferEtherAmount);
             }
         }
-        if(users[idOf[adr]].status == TICKETCANCELLED)
+        if(users[idOf[adr]].status == policyStatus.TICKETCANCELLED)
         {
-            for(int i=0; i<users[id].investorCount ; i++){
-                address adr = users[id].investorAdrOf[i];
-                uint256 transferEtherAmount = users[id].investedAmountOf[adr] + users[id].finalPremium*users[id].investedAmountOf[adr]/users[id].poolSize;
+            for( i=0; i<users[id].investorCount ; i++){
+                 adr = users[id].investorAdrOf[i];
+                transferEtherAmount = users[id].investedAmountOf[adr] + users[id].finalPremium*users[id].investedAmountOf[adr]/users[id].poolSize;
                 transferEther(address(this), adr, transferEtherAmount);
             }
         }
+        return true;
     }
     //Internal
     function transferEther(address sender, address reciever, uint256 amount) internal {
-        sender.transfer(reciever, amount);
+        reciever.transfer(amount);
     }
 
 }
