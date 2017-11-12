@@ -1,24 +1,34 @@
-# Toshi SOFA App
+# SureFly
 
-This repo helps you build a [Toshi app](https://www.toshi.org) in Javascript.
+This repo is the codebase for the crowdsourced decentralized insurance platform SureFly developed for proffer hackathon
 
-The sample bot can:
+There are two parts of this project
 
-* send messages
-* send and request money
-* create simple UI for buttons and menus
-* store sessions and state for each user
+* A Toshi Bot project: UI for the platform using a Toshi Bot
+* A Truffle project for the smart contracts
 
-TODO
 
-* sending image messages
-* creating web view UIs
+Using this app you can
 
-## Launch your own Toshi app in 5 minutes
+* Insure your flight from misses
+* Invest in people's insurance policy
 
-Read our [guide to creating a Toshi app](http://developers.toshi.org/docs/creating-a-token-app).
+Read our [problem statement and solution](https://docs.google.com/document/d/1M0w_6ArvHGOpiro6yM1p4IM7u9SvdDZ-HENzLx1EttY/edit?usp=sharing).
 
-When ready, fork this repo and deploy it to Heroku.
+## How to use
+
+* Download the Toshi App
+* Search for SureFlyBot
+* Click on message: You are good to go! 
+
+
+## Architecture
+
+# Process Flow:
+
+For a 
+
+
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 

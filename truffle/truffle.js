@@ -1,18 +1,32 @@
-var HDWalletProvider = require("truffle-hdwallet-provider");
+require('babel-register');
+require('babel-polyfill');
 
-var infura_apikey = "XXXXXX";
-var mnemonic = "twelve words you can find in metamask/settings/reveal seed words blabla";
 
 module.exports = {
   networks: {
-    development: {
+    testrpc: {
       host: "localhost",
       port: 8545,
-      network_id: "*" // Match any network id
+      network_id: "*",
+      gas: 99999999
+    },
+    kovan: {
+      host: "localhost",
+      port: 8545,
+      network_id: "3",
+      from: "0x00FcEf22b8e9c3741B0082a8E16DD92c2FE63A32",
+      gas: 1512388
     },
     ropsten: {
-      provider: new HDWalletProvider(mnemonic, "https://ropsten.infura.io/" + infura_apikey),
-      network_id: 3
+      host: "localhost",
+      port: 8545,
+      network_id: "2",
+      from: "0x00CFFD2cE294B153B2a597D9863102617adb94ED"
+    },
+    mainnet: {
+      host: "localhost",
+      port: 8545,
+      network_id: "1"
     }
   }
 };

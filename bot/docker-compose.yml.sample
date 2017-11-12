@@ -1,0 +1,40 @@
+version: '2'
+services:
+  headless-client:
+    build: dependencies/headless-client
+    links:
+      - redis
+      - postgres
+    environment: &environment
+      - TOKEN_APP_SEED=crumble project believe loyal cruise start polar fantasy tiny jungle mom negative
+      - TOKEN_APP_USERNAME=sureflybot
+      - TOKEN_APP_NAME=SureFlyBot
+      - TOKEN_APP_AVATAR=
+      - REDIS_URL=redis://h:rlcMWNrxXgqS0xM8aWCYuE0R@redis:6379
+      - DATABASE_URL=postgres://token:va5uOdJBqu2dZ1@postgres:5432/token
+      - LOG_LEVEL=INFO
+      - ENABLE_LOG_TIMESTAMPS=0
+    volumes:
+      - ./config:/usr/src/headless-client/config
+      - ./attachments:/usr/src/headless-client/attachments
+  bot:
+    build: .
+    links:
+      - redis
+      - postgres
+    environment: *environment
+    volumes:
+      - ./config:/usr/src/bot/config
+      - ./src:/usr/src/bot/src
+  redis:
+    build: dependencies/redis
+    ports:
+      - 6379
+  postgres:
+    image: postgres:9.6
+    ports:
+      - 15432
+    environment:
+      - POSTGRES_PASSWORD=va5uOdJBqu2dZ1
+      - POSTGRES_USER=token
+      - POSTGRES_DB=token

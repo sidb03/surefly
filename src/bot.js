@@ -67,13 +67,13 @@ function onCommand(session, command) {
     case 'pay':
       pay(session)
       break;
-    case 'count':
-      count(session)
-      break
-    case 'donate':
-      donate(session)
-      break
-    }
+    // case 'count':
+    //   count(session)
+    //   break
+    // case 'donate':
+    //   donate(session)
+    //   break
+    // }
 }
 
 function processPayment(session) {
@@ -128,14 +128,17 @@ function welcome(session) {
 function handleInsurance(session) {
   switch (session.get('app_state')) {
     case (STATES.welcome) :
-      session.reply('Please enter your booking number');
+      session.reply('Please enter your booking number:');
       session.set('app_state', STATES.waitingForBooking);
       break;
     case (STATES.waitingForBooking):
-      session.reply('Enter the amount you want to insure');
+      session.reply('Your ticket amount is: $50. Enter the amount you want to insure:');
       session.set('app_state', STATES.waitingForInsuranceAmount)
       break;
     case (STATES.waitingForInsuranceAmount):
+      if (insurance_amount >= 50)
+      {session.reply('Your insurance amount cannot exceed ticket price. Please Re-enter')
+        session.set('app_state', STATES.waitingForInsuranceAmount)}
       session.reply('Enter your current location');
       session.set('app_state', STATES.waitingForLocation)
       break;

@@ -1,0 +1,50 @@
+{
+  "name": "Toshi SOFA App",
+  "description": "Foundation for building a SOFA app for Toshi (Chat Bot / Web View)",
+  "repository": "https://github.com/toshiapp/toshi-sofa-app",
+  "env": {
+    "TOKEN_APP_SEED": {
+      "description": "12 word secret backup phrase"
+    },
+    "TOKEN_APP_USERNAME": {
+      "description": "Choose a username for your app: letters, numbers, and underscores only"
+    },
+    "TOKEN_APP_NAME": {
+      "description": "Choose a display name - all characters allowed"
+    },
+    "STAGE": {
+      "description": "Stage of deployment: development (default) or production",
+      "value": "development",
+      "required": true
+    },
+    "NODE_MODULES_CACHE": {
+      "description": "Enable the often-troublesome npm/yarn cache",
+      "value": "false",
+      "required": false
+    }
+  },
+  "formation": {
+    "headless-client": {
+      "quantity": 1,
+      "size": "free"
+    },
+    "bot": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [
+      {
+        "plan": "heroku-redis:hobby-dev"
+      },{
+        "plan": "heroku-postgresql:hobby-dev"
+      }
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },{
+      "url": "heroku/gradle"
+    }
+  ]
+}
