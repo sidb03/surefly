@@ -1,0 +1,20 @@
+plugins {
+    id "us.kirchmeier.capsule" version "1.0.2"
+}
+
+apply plugin: 'java'
+
+repositories {
+  jcenter()
+  maven { url 'https://jitpack.io' }
+}
+
+task stage(type: FatCapsule) {
+  applicationClass 'com.bakkenbaeck.token.headless.TokenHeadlessClient'
+  baseName 'toshi-headless-client'
+  version = '0.2.1'
+}
+
+dependencies {
+  compile 'com.github.toshiapp:toshi-headless-client:v0.2.1'
+}
