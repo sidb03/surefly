@@ -33,7 +33,7 @@ contract surefly{
         userCount = 0;
     }
     //External
-    function addUser(uint256 _maxPayout, uint _minPayout, uint256 _initialPremium, uint256 _prob)public returns(bool success) {
+    function addUser(uint256 _maxPayout, uint _minPayout, uint256 _initialPremium, uint256 _prob) public constant returns(bool success) {
         idOf[msg.sender]=userCount;
         users[userCount].adr = msg.sender;
         users[userCount].maxPayout = _maxPayout;
@@ -151,7 +151,7 @@ contract surefly{
         
     require(users[id].status!= policyStatus.OPEN);
 
-        if(isMinRaised(id)) {
+        if(!isMinRaised(id)) {
             users[id].status = policyStatus.CANCELLED;
         }
        users[id].finalPremium = (users[id].prob * users[id].poolSize) / 100;
@@ -163,7 +163,7 @@ contract surefly{
             transferEther(address(this), users[id].adr, users[id].poolSize);
             for( i=0; i<users[id].investorCount ; i++){
                  adr = users[id].investorAdrOf[i];
-                 transferEtherAmount = users[id].investedAmountOf[adr] - (((users[id].finalPremium)*(users[id].investedAmountOf[adr]))/users[id].poolSize);
+                 transferEtherAmount = (((users[id].finalPremium)*(users[id].investedAmountOf[adr]))/users[id].poolSize);
                 transferEther(address(this), adr, transferEtherAmount);
             }
         }
