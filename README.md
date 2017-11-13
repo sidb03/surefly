@@ -39,6 +39,7 @@ For a person who wants to invest in other people's investment policies (Will be 
 ## SureFlyBot : The chatbot on Toshi as the front end
 
 Here are a few screenshots from the conversation of a seeker with the bot:
+
 <a href="https://postimages.org/" target="_blank"><img src="https://s18.postimg.org/tvm3efwvd/ss00.png" alt="ss00"/></a> <a href="https://postimages.org/" target="_blank"><img src="https://s18.postimg.org/52cjdtvvd/ss01.png" alt="ss01"/></a><br/><br/>
 
 ## SureFly.sol: The deployed Smart Contract
