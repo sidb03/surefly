@@ -39,8 +39,8 @@ For a person who wants to invest in other people's investment policies (Will be 
 ## SureFlyBot : The chatbot on Toshi as the front end
 
 Here are a few screenshots from the conversation of a seeker with the bot:
-![Alt text](/ss00.png?raw=true =100x20 "Screenshot 1")
-![Alt text](/ss01.png?raw=true =250x "Screenshot 1")
+<a href="https://postimages.org/" target="_blank"><img src="https://s18.postimg.org/tvm3efwvd/ss00.png" alt="ss00"/></a> <a href="https://postimages.org/" target="_blank"><img src="https://s18.postimg.org/52cjdtvvd/ss01.png" alt="ss01"/></a><br/><br/>
+
 ## SureFly.sol: The deployed Smart Contract
 
 The smart contract is presently deployed on the testnet Ropsten, [here.](https://ropsten.etherscan.io/address/0x013b753cad4193c19f50c507cefd8aee65ece051)
