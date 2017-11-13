@@ -107,7 +107,7 @@ After some research, due to the lack of data pools on flight metrics, we generat
 
 We've used this in calculating the probability.
 
-# Sources: We studied the following research papers on flight metrics
+**Sources:**
 
   * [An Analysis of Passenger Delays Using Flight Operations and Passenger Booking Data](http://isapapers.pitt.edu/56/1/2004-20_Bratu.pdf)
   * [A model for estimating airline passenger trip reliability metrics from system-wide flight simulations] (http://www.scielo.br/scielo.php?script=sci_arttext&pid=S2238-10312013000200017): 
