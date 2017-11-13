@@ -21,26 +21,7 @@ module.exports = function(deployer, network, accounts) {
      */
 
     
-    var _listOfOwners;
-    if (network == "testrpc") {
-        _listOfOwners = [accounts[1], accounts[2], accounts[3]];
-    } else if (network == "ropsten") {
-        var aliceRopsten = "0x00568Fa85228C66111E3181085df48681273cD77";
-        var bobRopsten = "0x00B600dE56F7570AEE3d57fe55E0462e51ca5280";
-        var eveRopsten = "0x00F131eD217EC029732235A96EEEe044555CEd4d";
-        _listOfOwners = [aliceRopsten, bobRopsten, eveRopsten];
-    } else if (network == "mainnet") {
-        // you have to manually specify this 
-        // before you deploy this in mainnet
-        // or else this deployment will fail
-        var member1 = "0x00";
-        var member2 = "0x00";
-        var member3 = "0x00";
-        _listOfOwners = [member1, member2, member3];
-        if (member1 == "0x00" || member2 == "0x00" || member3 == "0x00") {
-            throw new Error("MultiSigWallet members are not set properly. Please set them in migration/2_deploy_contracts.js.");
-        }
-    }
+
 
     /**
      * 

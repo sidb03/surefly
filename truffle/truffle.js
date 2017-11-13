@@ -2,31 +2,21 @@ require('babel-register');
 require('babel-polyfill');
 
 
+var HDWalletProvider = require("truffle-hdwallet-provider");
+
+var infura_apikey = "2pXkGiKZbgxu7vxJFIFj";
+var mnemonic = "virtual you found best cover risk simple cradle idea dwarf rack measure";
+
 module.exports = {
   networks: {
-    testrpc: {
+    development: {
       host: "localhost",
       port: 8545,
-      network_id: "*",
-      gas: 99999999
-    },
-    kovan: {
-      host: "localhost",
-      port: 8545,
-      network_id: "3",
-      from: "0x00FcEf22b8e9c3741B0082a8E16DD92c2FE63A32",
-      gas: 1512388
+      network_id: "*" // Match any network id
     },
     ropsten: {
-      host: "localhost",
-      port: 8545,
-      network_id: "2",
-      from: "0x00CFFD2cE294B153B2a597D9863102617adb94ED"
-    },
-    mainnet: {
-      host: "localhost",
-      port: 8545,
-      network_id: "1"
+      provider: new HDWalletProvider(mnemonic, "https://ropsten.infura.io/" + infura_apikey),
+      network_id: 3
     }
   }
 };
