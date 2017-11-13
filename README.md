@@ -36,12 +36,31 @@ For a person who wants to invest in other people's investment policies (Will be 
   * He chooses the one he wants to invest in and is then asked for the amount which he is asked to pay. The ratio of this amount to the maximum payout, decides his share of returns of the premium.
   * Thus, with a number of investors, the pool starts getting filled. In case, the minimum amount is not met, the policy stands cancelled and everyone gets their money back.
 
+A more detailed processflow can be found [here](https://realtimeboard.com/app/board/o9J_k0XST14=/)
+
 ## SureFlyBot : The chatbot on Toshi as the front end
 
 Here are a few screenshots from the conversation of a seeker with the bot:
 
 <a href="https://postimages.org/" target="_blank"><img src="https://s18.postimg.org/tvm3efwvd/ss00.png" alt="ss00"/></a> <a href="https://postimages.org/" target="_blank"><img src="https://s18.postimg.org/52cjdtvvd/ss01.png" alt="ss01"/></a> <a href="https://postimages.org/" target="_blank"><img src="https://s18.postimg.org/aqiu4z809/ss03.png" alt="ss03"/></a><br/><br/>
 
+This bot makes use of three APIs:
+  * **The Aadhar API**: To verify a person's name against his aadhar number and a mobile OTP verification for identity verification
+  * **A flight data API**: To take the booking number and name as an input and
+    * Ticket identity verification: If the ticket is indeed booked in his name
+    * Provide details like ticket price, flight departure time, boarding gate closure time
+    * The API is hit at the estimated boarding gate closure time, which returns, if the passenger has boarded the flight (using the confirmation at the boarding gate). Also, if the flight is delayed, the API is hit at the delayed flight boarding gate closure time and again the same process is repeated. 
+    * On every API hit, two boolean values, if the flight is cancelled and if the ticket is cancelled are also returned.
+  * **Google Maps API**: The google maps API returns estimated time of arrival at the airport, taking the time, location (geodata) and airport name as inputs
+
+The functionalities of this bot, other than taking user inputs and calling these APIs are:
+  * Calculating probability based on ETA provided by Google maps and the time of booking.
+  * Calculating the premium based on this probability and the max payout amount.
+  * It makes the following web3 calls to the smart contract:
+    * Adding User: calls addUser() using all the user data accumulated to add a new user
+    * Calls various functions triggering payouts, like flight departure, boarding gate closure, flight cancellation, ticket cancellation. There are separate functions for each of these in the smart contract and they are called using web3.js, triggering payouts.
+    * Post-Payout, recieving all all the data from the smart contract for presenting back to the users, like payout amounts, net payments etc.
+    * Stores all this data on a MongoDB, for generating a data source which will help improve the probability function in the future.
 
 ## SureFly.sol: The deployed Smart Contract
 
