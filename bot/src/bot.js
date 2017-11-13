@@ -233,7 +233,7 @@ function onCommand(session, command) {
         break;
       case (STATES.waitingforaadharnumber):
       session.reply('Your identity is verified.');
-        session.reply('Your ticket amount is: $50. Enter the amount you want to insure:');
+        session.reply('Your ticket amount is: $50. Enter the amount maximum and minimum amount that you want to insure:');
         session.set('app_state', STATES.waitingForInsuranceAmount)
         break;
       case (STATES.waitingForInsuranceAmount):
