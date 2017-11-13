@@ -36,6 +36,10 @@ For a person who wants to invest in other people's investment policies (Will be 
   * He chooses the one he wants to invest in and is then asked for the amount which he is asked to pay. The ratio of this amount to the maximum payout, decides his share of returns of the premium.
   * Thus, with a number of investors, the pool starts getting filled. In case, the minimum amount is not met, the policy stands cancelled and everyone gets their money back.
 
+## SureFlyBot : The chatbot on Toshi as the front end
+
+Here are a few screenshots from the conversation of a seeker with the bot:
+![picture alt](https://imgur.com/a/hHbcx "Title is optional")
 ## SureFly.sol: The deployed Smart Contract
 
 The smart contract is presently deployed on the testnet Ropsten, [here.](https://ropsten.etherscan.io/address/0x013b753cad4193c19f50c507cefd8aee65ece051)

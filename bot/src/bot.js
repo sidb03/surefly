@@ -46,6 +46,10 @@ function onMessage(session, message) {
       console.log("BOOKING_NO: ", session.get('booking_no')); 
       handleInsurance(session);
       break;
+      case(STATES.waitingforaadharnumber):
+      session.set('aadhar_no', message.body)
+      handleInsurance(session);
+      break;
     case (STATES.waitingForInsuranceAmount):
       if (isNaN(message.body)) {
         session.set('app_state', STATES.waitingForBooking)
@@ -224,6 +228,11 @@ function onCommand(session, command) {
         session.set('app_state', STATES.waitingForBooking);
         break;
       case (STATES.waitingForBooking):
+        session.reply('Please enter your Aadhar Number:');
+        session.set('app_state', STATES.waitingforaadharnumber);
+        break;
+      case (STATES.waitingforaadharnumber):
+      session.reply('Your identity is verified.');
         session.reply('Your ticket amount is: $50. Enter the amount you want to insure:');
         session.set('app_state', STATES.waitingForInsuranceAmount)
         break;
