@@ -88,3 +88,35 @@ A few major functions of this contract:
 
     All this functionality is implemented in this function. For ether transfers, a separate function trasferEther() is called for each of the cases.
 
+## Probability Calculation
+
+The probability calculation based on time and location data is a study in statistics on the following:
+  * Historic miss rates, Close miss rates
+  * Historic flight delay rates
+  * Individual miss rates
+  * Correlation between expected time of arrival and probability of missing
+  * Classification by flight, route, time, city
+
+For a precise probability calculation, one needs a extensive data pool of the following data:
+  * Route-wise correlation between "Minutes early/late" and Flight misses
+  * Parameters could include - city, flight, whether flight got delayed, by how much time
+
+After some research, due to the lack of data pools on flight metrics, we generated the following sample data, which we believe is close to real world scenarios:
+
+[![Screen_Shot_2017-11-13_at_10.39.24.png](https://s18.postimg.org/dcyclz4dl/Screen_Shot_2017-11-13_at_10.39.24.png)](https://postimg.org/image/6mhvcjh7p/)
+
+We've used this in calculating the probability.
+
+# Sources: We studied the following research papers on flight metrics
+
+  * [An Analysis of Passenger Delays Using Flight Operations and Passenger Booking Data](http://isapapers.pitt.edu/56/1/2004-20_Bratu.pdf)
+  * [A model for estimating airline passenger trip reliability metrics from system-wide flight simulations] (http://www.scielo.br/scielo.php?script=sci_arttext&pid=S2238-10312013000200017): 
+  * [Flight and Passenger Delays](http://web.mit.edu/airlines/industry_outreach/board_meeting_presentation_files/meeting-nov-2008/Barnhart%20Flight%20and%20Passenger%20Delays.pdf)
+
+## Future Prospects
+
+This is the simplest use case of a automated crowdfunded insurance program.
+
+This itself can be extended to provide automatic insurance coverage for all the paseensgers in a particular flight, each being a seeker and an investor at the same time. This will reduce overall premium and the avg probability across all passengers will be approx. 2%.
+
+Such a system can be implemented in any kind of parametric insurance like crop insurances. This can also be extended to use cases like suppply chain goods insurance, where all the stakeholders insure the travelling good, once a stable supply chain tracking system in place. 
