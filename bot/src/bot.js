@@ -51,12 +51,7 @@ function onMessage(session, message) {
       handleInsurance(session);
       break;
     case (STATES.waitingForInsuranceAmount):
-      if (isNaN(message.body)) {
-        session.set('app_state', STATES.waitingForBooking)
-        session.reply('Its not a valid number');
-        handleInsurance(session)
-        break
-      }
+      
       session.set('insurance_amount', message.body)
       console.log("INSURANCE_AMOUNT: ", session.get('insurance_amount'));
       
@@ -233,7 +228,7 @@ function onCommand(session, command) {
         break;
       case (STATES.waitingforaadharnumber):
       session.reply('Your identity is verified.');
-        session.reply('Your ticket amount is: $50. Enter the amount maximum and minimum amount that you want to insure:');
+        session.reply('Your ticket amount is: $50. Enter the amount maximum amount that you want to insure:');
         session.set('app_state', STATES.waitingForInsuranceAmount)
         break;
       case (STATES.waitingForInsuranceAmount):

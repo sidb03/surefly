@@ -103,14 +103,14 @@ For a precise probability calculation, one needs a extensive data pool of the fo
 
 After some research, due to the lack of data pools on flight metrics, we generated the following sample data, which we believe is close to real world scenarios:
 
-[![Screen_Shot_2017-11-13_at_10.39.24.png](https://s18.postimg.org/dcyclz4dl/Screen_Shot_2017-11-13_at_10.39.24.png)](https://postimg.org/image/6mhvcjh7p/)
+[![Screen_Shot_2017-11-13_at_11.07.17.png](https://s8.postimg.org/7v5slc3h1/Screen_Shot_2017-11-13_at_11.07.17.png)](https://postimg.org/image/e8uvol8cx/)
 
 We've used this in calculating the probability.
 
 **Sources:**
 
   * [An Analysis of Passenger Delays Using Flight Operations and Passenger Booking Data](http://isapapers.pitt.edu/56/1/2004-20_Bratu.pdf)
-  * [A model for estimating airline passenger trip reliability metrics from system-wide flight simulations] (http://www.scielo.br/scielo.php?script=sci_arttext&pid=S2238-10312013000200017): 
+  * [A model for estimating airline passenger trip reliability metrics from system-wide flight simulations] (http://www.scielo.br/scielo.phpscript=sci_arttext&pid=S2238-10312013000200017)
   * [Flight and Passenger Delays](http://web.mit.edu/airlines/industry_outreach/board_meeting_presentation_files/meeting-nov-2008/Barnhart%20Flight%20and%20Passenger%20Delays.pdf)
 
 ## Future Prospects
