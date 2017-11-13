@@ -40,9 +40,19 @@ For a person who wants to invest in other people's investment policies (Will be 
 
 The smart contract is presently deployed on the testnet Ropsten, [here.](https://ropsten.etherscan.io/address/0x013b753cad4193c19f50c507cefd8aee65ece051)
 
+This smart contract is responsible for doing all the transactions, based on different conditions being met. The claim process is automated using this smart contract. It is deployed on the testnet and we use a Infura address to communicate with it using Web3. 
+
+Major State Variables:
+  * A structure to store all the details of a seeker. Mappings of this structure are used to map different structure instances to an id number and a address.
+    * This structure has a mapping of investor addresses with their respective amounts and id, as a variable.
+  * An Enum that has the different states a policy can be in. An instance of this enum is a variable in the seeker structure.
+  * Count variables to keep a count and to iterate through user structure mapping and the investor mapping. 
+
 A few major functions of this contract:
   * **addUser(uint256 _maxPayout, uint _minPayout, uint256 _initialPremium, uint256 _prob)** : Used to add a new policy (seeker). Default policyStatus is OPEN
   * **isMinRaised(uint _id)** : Internally used to check if min amount to be raised is reached for a particular policy
+  * **queryPoolSize(address adr)** : Externally called to get the current pool size of a particular seeker.
+  * **listAllAvailablePolicies()** : Externally called to get the list of all open policies. Returns an array of addresses.
   * **invest(address _adr, uint256 _amount)** : Called whenever a new investor is added. Certain conditions are checked before the investment request is forwarded, like the flight shouldn't have departed, Max Payout shouldn't have been reached, the user must not have boarded etc. Adds address and amount invested to the storage for the particular policy
   * **payout(uint id)** : Called whenever there is a trigger condition for the payout. These are the four conditions and what happens in each case:
     * Flight Missed: The seeker is paid the amount that has been raised in the pool. The investors are paid the premium which is divided proportionally on the basis of their contribution to the pool.
@@ -50,8 +60,8 @@ A few major functions of this contract:
     * Flight Cancelled/Minimum Insured amount not met: The seeker gets back his premium. The investors get their respective investments back.
     * Ticket Cancelled : The seeker loses his premium and doesn't get a payout. Investors get their invested amount back along with the premium divided proportionally. 
 
-  All this functionality is implemented in this function. For ether transfers, a separate function trasferEther() is called for each of the cases.
-  
+    All this functionality is implemented in this function. For ether transfers, a separate function trasferEther() is called for each of the cases.
+
 ## Architecture
 
 Deploying a Toshi app requires a few processes to run:
